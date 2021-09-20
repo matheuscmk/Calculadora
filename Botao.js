@@ -13,7 +13,7 @@ export default function Botao(props) {
         height:'25%'
       }}
     >
-      <TouchableOpacity onPress={()=>props.logicaCalculadora()} style={{width:'100%', height:'100%', justifyContent:'center', alignItems:'center'}}>
+      <TouchableOpacity onPress={()=>props.logicaCalculadora(props.numero)} style={{width:'100%', height:'100%', justifyContent:'center', alignItems:'center'}}>
         <Text style={{ fontSize: 30, color: 'yellow' }}>
           {props.numero}
         </Text>

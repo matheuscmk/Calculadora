@@ -21,8 +21,35 @@ export default function App() {
     numeros.push(i);
   }
 
-  function logicaCalculadora() {
-    //Logica da calculadora
+  function logicaCalculadora(n) {
+    if(sinal == ""){
+      setFirstNumber(parseInt(firstNumber.toString() + n.toString()));
+      setStringCalculo(parseInt(firstNumber.toString() + n.toString()));
+    }
+    if((n == "/" || n == "*" || n == "+" || n == "-" && secondNumber == 0)){
+      setStringCalculo(firstNumber.toString() + n);
+      setSinal(n);
+    }
+    if(sinal != ""){
+      setSecondNumber(parseInt(secondNumber.toString() + n.toString()));
+      setStringCalculo(firstNumber + sinal + parseInt(secondNumber.toString() + n.toString()));
+    }
+    if(n == "="){
+      let resultado = 0;
+      if(sinal == "+"){
+        resultado = firstNumber+secondNumber;
+      }else if(sinal == "-"){
+        resultado = firstNumber-secondNumber;
+      }else if(sinal == "/"){
+        resultado = firstNumber/secondNumber;
+      }else if(sinal == "*"){
+        resultado = firstNumber*secondNumber;
+      }
+      setStringCalculo(resultado);
+      setSinal("");
+      setFirstNumber(resultado);
+      setSecondNumber(0);
+    }
   }
 
   return (
@@ -35,8 +62,9 @@ export default function App() {
         style={{ flexDirection: "row", height: "16.6%", alignItems: "center" }}
       >
         <TouchableOpacity
+        onPress={()=>logicaCalculadora('+')}
           style={{
-            width: "25%",
+            width: "20%",
             backgroundColor: "rgb(79,85,94)",
             justifyContent: "center",
             height: "100%",
@@ -47,8 +75,9 @@ export default function App() {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
+         onPress={()=>logicaCalculadora('-')}
           style={{
-            width: "25%",
+            width: "20%",
             backgroundColor: "rgb(79,85,94)",
             justifyContent: "center",
             height: "100%",
@@ -59,8 +88,9 @@ export default function App() {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
+         onPress={()=>logicaCalculadora('/')}
           style={{
-            width: "25%",
+            width: "20%",
             backgroundColor: "rgb(79,85,94)",
             justifyContent: "center",
             height: "100%",
@@ -71,8 +101,9 @@ export default function App() {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
+         onPress={()=>logicaCalculadora('*')}
           style={{
-            width: "25%",
+            width: "20%",
             backgroundColor: "rgb(79,85,94)",
             justifyContent: "center",
             height: "100%",
@@ -80,6 +111,19 @@ export default function App() {
         >
           <Text style={{ fontSize: 30, textAlign: "center", color: "yellow" }}>
             *
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+         onPress={()=>logicaCalculadora('=')}
+          style={{
+            width: "20%",
+            backgroundColor: "rgb(79,85,94)",
+            justifyContent: "center",
+            height: "100%",
+          }}
+        >
+          <Text style={{ fontSize: 30, textAlign: "center", color: "yellow" }}>
+            =
           </Text>
         </TouchableOpacity>
       </View>
